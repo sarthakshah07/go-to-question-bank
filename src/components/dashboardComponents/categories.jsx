@@ -244,8 +244,8 @@ const Categories = () => {
                 />
               </DialogTitle>
               {/* <form onSubmit={handleSubmit}> */}
-              <div className="mt-4 gap-2 ">
-                <Field className="flex flex-col">
+              <div className="mt-4 gap-2  flex flex-col justify-center items-center">
+                <Field className="flex flex-col justify-center items-center" >
                   <Label className="text-sm/6 font-medium text-white text-transform-capitalize">
                     Icon
                   </Label>
@@ -260,8 +260,9 @@ const Categories = () => {
                     <CldImage
                       cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
                       src={values?.categoryImage || ""} // Use this sample image or upload your own via the Media Explorer
-                      width="300" // Transform the image: auto-crop to square aspect_ratio
-                      height="300"
+                      width="200" // Transform the image: auto-crop to square aspect_ratio
+                      height="200"
+                      style={{marginBlock: "1rem"}}
                       crop={{
                         type: "auto",
                         source: true,
