@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { useState } from "react";
 import Categories from "@/components/dashboardComponents/categories";
+import UserList from "@/components/dashboardComponents/usersList";
+import UnderConstruction from "@/components/common/underContruction";
 
 
 const Page = () => {
@@ -53,11 +55,11 @@ const Page = () => {
       case "Categories":
         return <Categories/>;
       case "Questions":
-        return <div>Questions</div>;
+        return <UnderConstruction/>;
       case "Users":
-        return <div>Users</div>;
+        return <UserList/>;
       case "settings":
-        return <div>settings</div>;
+        return <UnderConstruction/>;
       default:
         return null;
     }
@@ -91,6 +93,7 @@ const Page = () => {
                   </TabPanel>
                 ))}
               </TabPanels>
+              
             </TabGroup>
           </div>
         </div>
