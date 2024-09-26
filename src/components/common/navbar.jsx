@@ -47,7 +47,7 @@ export default function NavBar() {
     dispatch(signOutAction());
   };
   return (
-    <Disclosure as="nav" className="sticky top-0  w-full">
+    <Disclosure as="nav" className="sticky top-0  w-full " style={{zIndex:999 , background:"transparent"}}>
       {/* className="fixed bg-black-800 z-50 w-full" */}
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
@@ -131,7 +131,7 @@ export default function NavBar() {
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
-                      <div className="hidden sm:block">
+                      <div >
                         <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
@@ -201,7 +201,7 @@ export default function NavBar() {
             </>
           )}
         </div>
-        <div className="glass-effect-dark block sm:ml-6 sm:hidden flex  border border-gray-700" style={{justifyContent: 'flex-end', fontSize:"12px", color:"white", borderRadius:"5px", padding:1}}>
+        {/* <div className="glass-effect-dark block sm:ml-6 sm:hidden flex  border border-gray-700" style={{justifyContent: 'flex-end', fontSize:"12px", color:"white", borderRadius:"5px", padding:1}}>
           <Link href={`/dashboard/${currentUser?.userRole}`}>Dashboard</Link>
           {" "}
           <Link href="#"  onClick={() => {
@@ -211,7 +211,7 @@ export default function NavBar() {
                                 "Want to Sign out?"
                               );
                             }} style={{marginInline:"10px"}}>Sign Out</Link>
-        </div>
+        </div> */}
       </div>
       <LoginDialog
         openLoginModal={openLoginModal}
