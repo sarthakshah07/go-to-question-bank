@@ -1,18 +1,21 @@
-import { toast } from 'react-toastify';
+
+import {  toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
+const toastConfig ={
+  autoClose: 1000,
+  style: { zIndex: 999, background: "#333" },
+  bodyStyle: { zIndex: 999, color: "#fff" }
+}
 export const showSuccessMessage = (message) => {
-  toast.success(message, {
-    autoClose: 1000,
-    style: { zIndex: 999 },
-    bodyStyle: { zIndex: 999 }
-  });
+
+  console.log("message message", message);
+  toast.success(message, toastConfig);
+  // Toast.update("success", { autoClose: 1000, style: { zIndex: 999 }, bodyStyle: { zIndex: 999 } });
 };
 
 export const showErrorMessage = (message) => {
-  toast.error(message, {
-    autoClose: 1000
-  });
+  toast.error(message,toastConfig);
 };
 
 export const swalConfirmationFunc = (func, row, message) => {

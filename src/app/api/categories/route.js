@@ -152,7 +152,7 @@ export async function GET(req) {
         data: [],
       });
     }
-    return NextResponse.json({ success: true, data: categories });
+    return NextResponse.json({ success: true, data: categories ,message: "Categories fetched successfully"});
   } catch (error) {
     return NextResponse.json(
       { success: false, message: "Error while fetching categories" },

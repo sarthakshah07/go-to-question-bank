@@ -1,5 +1,6 @@
 import db from '@/app/services/mongodb';
 import { generateToken } from '@/lib/utils';
+import { ObjectId } from 'mongodb';
 import { NextResponse, NextRequest } from 'next/server';
 // import { db } from '@/app/services/mongodb';
 const usersCollection = db.collection('users');
@@ -106,14 +107,29 @@ export async function POST(req) {
       return NextResponse.json({ success: false, message: 'Unknown action' }, { status: 400 });
   }
 }
-
+export const validateAdmin = async (userId) => {
+  const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+  console.log('user admin', user);
+  if (!user) {
+    return false;
+  }
+  if (user.userRole === 'admin') {
+    return true;
+  }
+  return false;
+}
 export async function GET(req) {
+    const { searchParams } = new URL(req.url);  
+    const userId = searchParams.get('userId');
+
+    if (!validateAdmin(userId)) return NextResponse.json({ success: false, message: 'Unauthorized access' }, { status: 401 });
   try {
     const users = await usersCollection.find({}).toArray();
+    console.log('users', users);
     if (!users.length || users.length === 0) {
       return NextResponse.json({ success: false, message: 'No users found', data: [] });
     }
-    return NextResponse.json({ success: true, data: users });
+    return NextResponse.json({ success: true, data: users, message: 'Users fetched successfully' });
   } catch (error) {
     return NextResponse.json({ success: false, message: 'Error while fetching users' }, { status: 500 });
   }

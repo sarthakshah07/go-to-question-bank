@@ -7,6 +7,7 @@ import { useState } from "react";
 import Categories from "@/components/dashboardComponents/categories";
 import UserList from "@/components/dashboardComponents/usersList";
 import UnderConstruction from "@/components/common/underContruction";
+import UserSettings from "@/components/dashboardComponents/UserSettings";
 
 
 const Page = () => {
@@ -48,18 +49,23 @@ const Page = () => {
       name: "My Questions",
       posts: []
     },
+    {
+      name: "settings"
+    },
   ]
   // const [selectedTab, setSelectedTab] = useState(categories?.[0]);
   const renderUi = (name) => {
     switch (name) {
       case "Categories":
         return <Categories/>;
-      case "Questions":
+      case "Questions" :
         return <UnderConstruction/>;
       case "Users":
         return <UserList/>;
       case "settings":
-        return <UnderConstruction/>;
+        return <UserSettings/>;
+        case "My Questions":
+          return <UnderConstruction/>;
       default:
         return null;
     }

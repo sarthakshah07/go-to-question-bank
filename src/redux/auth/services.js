@@ -26,7 +26,7 @@ export const continueWithGoogleAsync = async (request) => {
       action: "google",
     }
     const response = await axiosInstance.post(
-      url,
+      `${url}/userstatus`,
       req
     );
     return response;
@@ -57,3 +57,27 @@ export const signUpAsync = async (request) => {
   }
 };
 
+
+export const getUsersListAsync = async (request) => {
+  try {
+    const response = await axiosInstance.get(
+      `${url}?userId=${request}`
+    );
+    console.log("response", response);
+    return response;
+  } catch (error) {
+    throw new Error(isAxiosError(error).message);
+  }
+}
+export const updateUserStatusAsync = async (request) => {
+  try {
+    const response = await axiosInstance.post(
+      url,
+      request
+    );
+    console.log("response", response);
+    return response;
+  } catch (error) {
+    throw new Error(isAxiosError(error).message);
+  }
+}

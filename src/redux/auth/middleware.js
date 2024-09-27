@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   continueWithGoogleAsync,
+  getUsersListAsync,
   loginByEmailAsync,
   otpVerifyAsync,
   resendOtpAsync,
@@ -53,3 +54,32 @@ export const signUpAction = createAsyncThunk(
   }
 );
 
+export const getUsersListAction = createAsyncThunk(
+  "/getUsersListAction",
+  async (request, { dispatch, rejectWithValue }) => {
+    try {
+      // dispatch(showLoading());
+      const response = await getUsersListAsync(request);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    } finally {
+      // dispatch(hideLoading());
+    }
+  }
+);
+
+
+export const updateUserStatusAction = createAsyncThunk(
+  "/updateUserStatusAction",
+  async (request, { dispatch, rejectWithValue }) => {
+    try {
+      // dispatch(showLoading());
+      const response = await updateUserStatusAsync(request);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    } finally {
+      // dispatch(hideLoading()); 
+    }
+  });

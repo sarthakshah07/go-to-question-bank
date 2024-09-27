@@ -2,17 +2,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addCategoriesAction,
-  deleteCategoriesAction,
-  getCategoriesAction,
-  updateCategoriesAction,
-} from "@/redux/categories/middleware";
-import { categoriesSelector } from "@/redux/categories/categoriesSlice";
-import WrapperComponent from "@/components/common/wrapperComponent";
-import Image from "next/image";
-import { PlusIcon } from "@radix-ui/react-icons";
-import ShimmerButton from "../magicui/shimmer-button";
-import {
   Button,
   Dialog,
   DialogPanel,
@@ -22,21 +11,32 @@ import {
   Label,
   Switch,
 } from "@headlessui/react";
-import CommonTextField from "../common/commonTextField";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import FlipText from "../magicui/flip-text";
-import { CldImage, CldUploadButton } from "next-cloudinary";
-import { swalConfirmationFunc } from "@/app/services/notification.services";
-import { CommonTable } from "../common/commonTable";
-import UnderConstruction from "../common/underContruction";
+import { useParams } from "next/navigation";
+import { authSelector } from "@/redux/auth/authSlice";
+import { getUsersListAction } from "@/redux/auth/middleware";
+import CommonTable from "../common/commonTable";
 
 const UserList = () => {
-  
+  const {userrole} = useParams();
+  const dispatch = useDispatch();
+  const {currentUser,userList} = useSelector(authSelector);
+
+  console.log("userrole", userrole ,userList)
+  useEffect(() => {
+    if (userrole === "admin") {
+          dispatch(getUsersListAction(currentUser?.userId));
+    } else {
+      
+    }
+  }, [])
+
+  const handleUserStatus = (data) => {
+    // dispatch(updateUserStatusAction({userId: data._id, userStatus: data.userStatus === "active" ? "inactive" : "active"}))
+  }
   return (
-    <div className="w-full flex justify-center items-center" >
-        <UnderConstruction/>
-        {/* <CommonTable />/////// */}
+    <div className="w-full flex justify-center items-center "  >
+        {/* <UnderConstruction/> */}
+        <CommonTable tableData={userList} setStatus={handleUserStatus}/>
     </div>
   );
 };

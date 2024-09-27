@@ -294,7 +294,7 @@ const Categories = () => {
                   touched={touched.categoryName}
                   errors={touched.categoryName && errors.categoryName}
                 />
-                <Field>
+                <Field style={{width:"100%"}}>
                   <Label className="text-sm/6 font-medium text-white text-transform-capitalize">
                     Category Status
                   </Label>
