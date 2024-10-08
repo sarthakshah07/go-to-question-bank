@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getUser, removeUser, setUser } from "@/commonServices/token.services";
-import { continueWithGoogleAction, getUsersListAction, loginByEmailAction, signUpAction } from "./middleware";
+import { continueWithGoogleAction, getUsersListAction, loginByEmailAction, signUpAction, updateUserStatusAction } from "./middleware";
 
 const initialState = {
   loading: false,
@@ -72,6 +72,23 @@ const authSlice = createSlice({
       .addCase(getUsersListAction.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.userList = payload?.data;
+      })
+      .addCase(updateUserStatusAction.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUserStatusAction.rejected, (state) => {
+        state.loading = false;
+        // Handle rejection or error states if needed
+      })
+      .addCase(updateUserStatusAction.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.userList = [...state.userList.map((user) => {
+          if (user._id === payload?.data?._id) {
+            return payload?.data;
+          }
+          return user;
+        })];
+        // state.currentUser = payload?.data;
       });
   },
 });

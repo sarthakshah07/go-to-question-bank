@@ -13,7 +13,7 @@ import {
 } from "@headlessui/react";
 import { useParams } from "next/navigation";
 import { authSelector } from "@/redux/auth/authSlice";
-import { getUsersListAction } from "@/redux/auth/middleware";
+import { getUsersListAction, updateUserStatusAction } from "@/redux/auth/middleware";
 import CommonTable from "../common/commonTable";
 
 const UserList = () => {
@@ -31,7 +31,8 @@ const UserList = () => {
   }, [])
 
   const handleUserStatus = (data) => {
-    // dispatch(updateUserStatusAction({userId: data._id, userStatus: data.userStatus === "active" ? "inactive" : "active"}))
+    console.log("data", data)
+    dispatch(updateUserStatusAction({userId: data._id, userStatus: data.userStatus === "active" ? "inactive" : "active"}))
   }
   return (
     <div className="w-full flex justify-center items-center "  >

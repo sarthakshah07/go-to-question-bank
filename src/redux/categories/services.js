@@ -1,5 +1,5 @@
 
-import { axiosInstance } from "@/app/services/api.services";
+import { axiosInstance, isAxiosError } from "@/app/services/api.services";
 
 const url = "/api/categories";
 export const getCategoriesAsync = async () => {

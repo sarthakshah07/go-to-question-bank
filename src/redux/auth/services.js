@@ -1,5 +1,5 @@
 
-import { axiosInstance } from "@/app/services/api.services";
+import { axiosInstance, isAxiosError } from "@/app/services/api.services";
 
 const url = "/api/users"
 export const loginByEmailAsync = async (request) => {
@@ -73,7 +73,7 @@ export const updateUserStatusAsync = async (request) => {
   try {
     const response = await axiosInstance.post(
       url,
-      request
+      {...request, action: "updateUserStatus"}
     );
     console.log("response", response);
     return response;
