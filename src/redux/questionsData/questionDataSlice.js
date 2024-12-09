@@ -1,21 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getUser, removeUser, setUser } from "@/commonServices/token.services";
 import {
-  addCategoriesAction,
-  deleteCategoriesAction,
-  getCategoriesAction,
   getQuestionsByCategoryIdAction,
-  loginByEmailAction,
-  updateCategoriesAction,
+  updateQuestionAction,
 } from "./middleware";
 
 const initialState = {
   loading: false,
-  allQuestionData: null,
+  allQuestionData: [],
 
 };
 
-const questionsSlice = createSlice({
+const questionsDataSlice = createSlice({
   name: "QuestionData",
   initialState: initialState,
   reducers: {},
@@ -25,6 +21,7 @@ const questionsSlice = createSlice({
         state.loading = true;
       })
       .addCase(getQuestionsByCategoryIdAction.fulfilled, (state,{payload}) => {
+        console.log("payload.....",payload.data)
         state.loading = false;
         state.allQuestionData = payload.data
       })
@@ -32,52 +29,27 @@ const questionsSlice = createSlice({
         state.loading = false;
         // Handle rejection or error states if needed
       })
-      .addCase(addCategoriesAction.pending, (state) => {
+      .addCase(updateQuestionAction.pending, (state) => {
         state.loading = true;
       })
-      .addCase(addCategoriesAction.fulfilled, (state, { payload }) => {
+      .addCase(updateQuestionAction.fulfilled, (state,{payload}) => {
         state.loading = false;
-        state.categories = {
-          ...state.categories,
-          ...payload,
-        };
+        state.allQuestionData = state.allQuestionData.map((question) => {
+          console.log("question,",question,payload)
+          if (question._id === payload._id) {
+            return action.payload;
+          }
+          return question;
+        })
       })
-      .addCase(addCategoriesAction.rejected, (state) => {
-        state.loading = false;
-        // Handle rejection or error states if needed
-      })
-      .addCase(updateCategoriesAction.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(updateCategoriesAction.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.categories = {
-          ...state.categories,
-          ...payload,
-        };
-      })
-      .addCase(updateCategoriesAction.rejected, (state) => {
+      .addCase(updateQuestionAction.rejected, (state) => {
         state.loading = false;
         // Handle rejection or error states if needed
-      })
-      .addCase(deleteCategoriesAction.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(deleteCategoriesAction.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.categories = {
-          ...state.categories,
-          ...payload,
-        };
-      })
-      .addCase(deleteCategoriesAction.rejected, (state) => {
-        state.loading = false;
-        // Handle rejection or error states if needed
-      })
+      });
   },
 });
 
 
 export const questionsSelector = (state) => state.QuestionData;
 
-export default questionsSlice.reducer;
+export default questionsDataSlice.reducer;

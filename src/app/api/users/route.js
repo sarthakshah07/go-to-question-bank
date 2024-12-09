@@ -194,7 +194,7 @@ export async function POST(req) {
           { status: 400 }
         );
       }
-
+     
       try {
         const user = await usersCollection.findOne({
           _id: new ObjectId(userId),
@@ -205,11 +205,14 @@ export async function POST(req) {
             { status: 404 }
           );
         }
+        const userStatusUpdated = user.userStatus === "inActive" ? "active" : "inActive";
         const updateResult = await usersCollection.updateOne(
           { _id: new ObjectId(userId) },
-          { $set: { userStatus } }
+          { $set: { userStatus:userStatusUpdated }  }
         );
-        console.log("updateResult", updateResult);
+        const userData = await usersCollection.findOne({
+          _id: new ObjectId(userId),
+        });
         if (updateResult.modifiedCount === 0) {
           return NextResponse.json(
             { success: false, message: "User Status not updated" },
@@ -219,7 +222,7 @@ export async function POST(req) {
         return NextResponse.json({
           success: true,
           message: "User Status updated successfully!",
-         data: user
+         data: userData
         });
       } catch (error) {
         return NextResponse.json(

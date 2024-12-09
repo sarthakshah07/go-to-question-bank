@@ -77,7 +77,6 @@ export const updateUserStatusAction = createAsyncThunk(
     try {
       // dispatch(showLoading());
       const response = await updateUserStatusAsync(request);
-      console.log("response", response);
       return response;
     } catch (error) {
       return rejectWithValue(error);

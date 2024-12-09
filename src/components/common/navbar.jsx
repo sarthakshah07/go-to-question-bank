@@ -160,6 +160,13 @@ export default function NavBar() {
                         My Dashboard */}
                           <Link
                             href={`/dashboard/${currentUser?.userRole}`}
+                            onClick={(e) => {
+                              if (typeof window !== "undefined") {
+                  
+                                localStorage.setItem("category", "settings");
+                               
+                              }
+                            }}
                             style={{
                               textDecoration: "none",
                               paddingLeft: "10px",

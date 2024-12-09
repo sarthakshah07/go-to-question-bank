@@ -21,7 +21,6 @@ const UserList = () => {
   const dispatch = useDispatch();
   const {currentUser,userList} = useSelector(authSelector);
 
-  console.log("userrole", userrole ,userList)
   useEffect(() => {
     if (userrole === "admin") {
           dispatch(getUsersListAction(currentUser?.userId));

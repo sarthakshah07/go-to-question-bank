@@ -1,15 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  addCategoriesAsync,
-  continueWithGoogleAsync,
+  addQuestionAsync,
   deleteQuestionAsync,
-  getCategoriesAsync,
   getQuestionsByCategoryIdAsync,
-  loginByEmailAsync,
-  otpVerifyAsync,
-  resendOtpAsync,
-  signUpAsync,
-  updateCategoriesAsync,
   updateQuestionAsync,
 } from "./services";
 
@@ -17,13 +10,13 @@ export const getQuestionsByCategoryIdAction = createAsyncThunk(
   "/getQuestionsByCategoryIdAction",
   async (request, { dispatch, rejectWithValue }) => {
     try {
-      dispatch(showLoading());
       const response = await getQuestionsByCategoryIdAsync(request);
+      console.log("response gettimh", response);
       return response;
     } catch (error) {
       return rejectWithValue(error);
     } finally {
-      dispatch(hideLoading());
+      // dispatch(hideLoading());
     }
   }
 );
@@ -31,13 +24,12 @@ export const addQuestionAction = createAsyncThunk(
   "/addQuestionAction",
   async (request, { dispatch, rejectWithValue }) => {
     try {
-      dispatch(showLoading());
       const response = await addQuestionAsync(request);
       return response;
     } catch (error) {
       return rejectWithValue(error);
     } finally {
-      dispatch(hideLoading());
+      // dispatch(hideLoading());
     }
   }
 );
@@ -45,13 +37,13 @@ export const updateQuestionAction = createAsyncThunk(
   "/updateQuestionAction",
   async (request, { dispatch, rejectWithValue }) => {
     try {
-      dispatch(showLoading());
+      // dispatch(showLoading());
       const response = await updateQuestionAsync(request);
       return response;
     } catch (error) {
       return rejectWithValue(error);
     } finally {
-      dispatch(hideLoading());
+      // dispatch(hideLoading());
     }
   }
 );

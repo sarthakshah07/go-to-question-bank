@@ -61,9 +61,10 @@ export default function LoginDialog({ openLoginModal, setOpeLoginModal }) {
           dispatch(loginByEmailAction(values)).then((res) => {
             if (res?.payload?.status === 200 || res?.payload?.status === 201) {
               close();
-              console.log("res?.payload", res?.payload?.data?.userRole);
               if (res?.payload?.data?.userRole === "admin") {
+                
                 router.push("/dashboard/admin");
+                
               }
 
             }

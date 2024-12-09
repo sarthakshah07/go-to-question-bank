@@ -82,14 +82,58 @@ const authSlice = createSlice({
       })
       .addCase(updateUserStatusAction.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.userList = [...state.userList.map((user) => {
+        const newUserList =  JSON.parse(JSON.stringify(state.userList)).map((user) => {
+          console.log("user payload", user._id, payload?.data?._id, JSON.parse(JSON.stringify(state.userList)));
           if (user._id === payload?.data?._id) {
             return payload?.data;
           }
           return user;
-        })];
-        // state.currentUser = payload?.data;
+        })
+        console.log("newUserList", newUserList, JSON.parse(JSON.stringify(state.userList)));
+        state.userList =newUserList
       });
+
+        // state.userList = [...state.userList.map((user) => {
+        //   let newUserList = user;
+        //   console.log("user payload 1", newUserList);
+        //   if (user._id === payload?.data?._id) {
+        //     return {
+        //       ...newUserList,
+        //       userStatus: payload?.data?.userStatus,
+        //     }
+        //   }
+        //   console.log("user payload final", newUserList);
+        //   return newUserList;
+        // })];
+        
+        
+        
+        
+        
+      //   // [...state.userList.filter((user) => {
+      //   //   console.log("user payload", user._id, payload?.data?._id);
+      //   //   user._id === payload?.data?._id
+      //   //    }).map((user) => {
+      //   //     [...user,
+      //   //     {
+      //   //       ...payload?.data
+      //   //     }]
+      //   //    })
+
+      //   // ];
+      //   // state.currentUser = payload?.data;
+      // })
+      // .addCase(updateUserStatusAction.fulfilled, (state, { payload }) =>  {
+      //   ...state,
+      //   state.loading= false,
+      //   state.userList = JSON.parse(JSON.stringify(state.userList)).map((user) => {
+      //     console.log("user payload", user._id, payload?.data?._id);
+      //     if (user._id === payload?.data?._id) {
+      //       return payload?.data;
+      //     }
+      //     return user;
+      //   })
+      // })
   },
 });
 

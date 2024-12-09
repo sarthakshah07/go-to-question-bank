@@ -75,7 +75,6 @@ export const updateUserStatusAsync = async (request) => {
       url,
       {...request, action: "updateUserStatus"}
     );
-    console.log("response", response);
     return response;
   } catch (error) {
     throw new Error(isAxiosError(error).message);

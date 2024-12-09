@@ -8,6 +8,8 @@ import Categories from "@/components/dashboardComponents/categories";
 import UserList from "@/components/dashboardComponents/usersList";
 import UnderConstruction from "@/components/common/underContruction";
 import UserSettings from "@/components/dashboardComponents/UserSettings";
+import CommonEditableAccordian from "@/components/common/commonEditableAccordian";
+import UserQuestions from "@/components/dashboardComponents/userQuestions";
 
 
 const Page = () => {
@@ -65,7 +67,7 @@ const Page = () => {
       case "settings":
         return <UserSettings/>;
         case "My Questions":
-          return <UnderConstruction/>;
+          return <UserQuestions/>;
       default:
         return null;
     }
@@ -92,9 +94,9 @@ const Page = () => {
                 </div>
                 
               </TabList>
-              <TabPanels className="mt-20 " >
+              <TabPanels className="mt-5 " >
                 {categories.map(({ name, posts }) => (
-                  <TabPanel key={name} className="rounded-xl bg-white/8 p-6">
+                  <TabPanel key={name} className="rounded-xl bg-white/8 p-6" >
                     {renderUi(name)}
                   </TabPanel>
                 ))}
